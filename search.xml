@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title></title>
+      <link href="2021/04/11/docker-an-zhuang-neo4j/"/>
+      <url>2021/04/11/docker-an-zhuang-neo4j/</url>
+      
+        <content type="html"><![CDATA[<h3 id="安装neo4j"><a href="#安装neo4j" class="headerlink" title="安装neo4j"></a>安装neo4j</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run \    --name testneo4j \    -p7474:7474 -p7687:7687 \    -d \    -v $HOME&#x2F;neo4j&#x2F;data:&#x2F;data \    -v $HOME&#x2F;neo4j&#x2F;logs:&#x2F;logs \    -v $HOME&#x2F;neo4j&#x2F;import:&#x2F;var&#x2F;lib&#x2F;neo4j&#x2F;import \    -v $HOME&#x2F;neo4j&#x2F;plugins:&#x2F;plugins \    --env NEO4J_AUTH&#x3D;neo4j&#x2F;test \    neo4j:latest        # NEO4J_AUTH 指定了访问neo4j的登录名和密码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="访问neo4j"><a href="#访问neo4j" class="headerlink" title="访问neo4j"></a>访问neo4j</h3><blockquote><p>url: <a href="http://localhost:7474/">http://localhost:7474/</a></p><p>username: neo4j</p><p>password: test</p></blockquote>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>centOS7安装docker</title>
+      <link href="2021/03/28/centos7-an-zhuang-docker/"/>
+      <url>2021/03/28/centos7-an-zhuang-docker/</url>
+      
+        <content type="html"><![CDATA[<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">wget -qO- https:&#x2F;&#x2F;get.docker.io&#x2F; | shsudo usermod -aG docker vagrantsudo mkdir &#x2F;etc&#x2F;dockersudo vim &#x2F;etc&#x2F;docker&#x2F;daemon.json## 写入 &#123;&quot;registry-mirrors&quot;: [&quot;https:&#x2F;&#x2F;registry.cn-hangzhou.aliyuncs.com&quot;]&#125; ##sudo systemctl daemon-reloadsudo systemctl restart docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo博客环境初始化</title>
+      <link href="2021/03/28/hexo-bo-ke-huan-jing-chu-shi-hua/"/>
+      <url>2021/03/28/hexo-bo-ke-huan-jing-chu-shi-hua/</url>
+      
+        <content type="html"><![CDATA[<ol><li><p>下载安装vagrant</p></li><li><p>下载安装virtualBox</p></li><li><p>下载centOS7.8 box文件</p></li><li><p>安装虚拟机</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">vagrant box add <span class="token operator">--</span>name CentOS7<span class="token punctuation">.</span>8  C:\Users\Administrator\Downloads\CentOS<span class="token operator">-</span>7<span class="token punctuation">.</span>boxcd D:md VirtualMachinecd VirtualMachinemd Blogcd Blogvagrant init CentOS7<span class="token punctuation">.</span>8vagrant up<span class="token comment"># 进入虚拟机</span>vagrant ssh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>修改虚拟机yum源</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo sed -e &#39;s|^mirrorlist&#x3D;|#mirrorlist&#x3D;|g&#39; \         -e &#39;s|^#baseurl&#x3D;http:&#x2F;&#x2F;mirror.centos.org|baseurl&#x3D;https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn|g&#39; \         -i.bak \         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-*.repo         sudo yum makecache<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>安装配置git</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo yum install git -ygit config --global user.name &quot;dinggenfeng&quot;git config --global user.email &quot;dinggenfeng@126.com&quot;## 生成密钥对(不要密码，一直回车)sudo ssh-keygen -t ed25519 -C &quot;dinggenfeng@126.com&quot;## 查看公钥，将公钥添加到githubsudo cat &#x2F;root&#x2F;.ssh&#x2F;id_ed25519.pub<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>安装node</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo yum install wget -ysudo wget -P &#x2F;tmp&#x2F; https:&#x2F;&#x2F;nodejs.org&#x2F;dist&#x2F;v15.12.0&#x2F;node-v15.12.0-linux-x64.tar.gzsudo tar zxvf &#x2F;tmp&#x2F;node-v15.12.0-linux-x64.tar.gz -C &#x2F;tmp&#x2F;sudo mv &#x2F;tmp&#x2F;node-v15.12.0-linux-x64 &#x2F;opt&#x2F;nodesudo ln -s &#x2F;opt&#x2F;node&#x2F;bin&#x2F;* &#x2F;usr&#x2F;bin&#x2F;## 测试安装情况node -vnpm -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>下载博客源码</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo git clone git@github.com:dinggenfeng&#x2F;blog.git &#x2F;opt&#x2F;blogcd &#x2F;opt&#x2F;blog&#x2F;sudo git checkout -b master origin&#x2F;master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>安装hexo</p><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo npm install -g hexo-clisudo ln -s &#x2F;opt&#x2F;node&#x2F;bin&#x2F;hexo &#x2F;usr&#x2F;bin&#x2F;sudo npm i hexo-deployer-git# 几个主题相关插件: 搜索、链接转拼音、字数统计sudo npm install hexo-generator-search --savesudo npm i hexo-permalink-pinyin --savesudo npm i hexo-wordcount --save<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> 环境 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password NO)</title>
+      <link href="2021/03/20/access-denied-for-user-root-localhost-using-password-no/"/>
+      <url>2021/03/20/access-denied-for-user-root-localhost-using-password-no/</url>
+      
+        <content type="html"><![CDATA[<h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># linux版本[root@VM-0-14-centos ~]# cat &#x2F;etc&#x2F;redhat-release CentOS Linux release 7.8.2003 (Core)# MySQL版本[root@VM-0-14-centos ~]# mysql --help | grep Distribmysql  Ver 14.14 Distrib 5.7.30, for Linux (x86_64) using  EditLine wrapper<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[root@VM-0-14-centos ~]# mysqlERROR 1045 (28000): Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: NO)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h4 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h4><h6 id="第一步：在不启动授权表的情况下启动MySQL"><a href="#第一步：在不启动授权表的情况下启动MySQL" class="headerlink" title="第一步：在不启动授权表的情况下启动MySQL"></a>第一步：在不启动授权表的情况下启动MySQL</h6><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 启动MySQL，跳过授权表（执行该命令，终端会处于锁定状态，放着不用管，重新打开一个终端）[root@VM-0-14-centos ~]# pkill mysql &amp;&amp; mysqld --skip-grant-tables<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h6 id="第二步：修改root用户密码"><a href="#第二步：修改root用户密码" class="headerlink" title="第二步：修改root用户密码"></a>第二步：修改root用户密码</h6><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 重新打开一个终端，连接mysql(这里连接的MySQL服务，就是上一步通过 &quot;mysqld --skip-grant-tables&quot; 启动的)# 在 mysql.user表里修改root用户的密码，然后退出[root@VM-0-14-centos ~]# mysqlmysql&gt; use mysql;mysql&gt; update user set authentication_string&#x3D;PASSWORD(&#39;123456&#39;) where user&#x3D;&#39;root&#39;;mysql&gt; flush privileges;mysql&gt; exit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h6 id="第三步：关闭第一步启动的MySQL"><a href="#第三步：关闭第一步启动的MySQL" class="headerlink" title="第三步：关闭第一步启动的MySQL"></a>第三步：关闭第一步启动的MySQL</h6><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 这个时候，通过 &quot;mysqld --skip-grant-tables&quot; 启动的MySQL还在运行，要杀掉这个进程[root@VM-0-14-centos ~]# pkill mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h6 id="第四步：正常方式启动MySQL服务并连接"><a href="#第四步：正常方式启动MySQL服务并连接" class="headerlink" title="第四步：正常方式启动MySQL服务并连接"></a>第四步：正常方式启动MySQL服务并连接</h6><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[root@VM-0-14-centos ~]# systemctl start mysqld.service [root@VM-0-14-centos ~]# mysql -uroot -pYourPassword<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> MySql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
