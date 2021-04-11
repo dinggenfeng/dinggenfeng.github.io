@@ -4,13 +4,21 @@
   
     
     <entry>
-      <title></title>
-      <link href="2021/04/11/docker-an-zhuang-neo4j/"/>
-      <url>2021/04/11/docker-an-zhuang-neo4j/</url>
+      <title>docker安装neo4j</title>
+      <link href="2021/04/10/docker-an-zhuang-neo4j/"/>
+      <url>2021/04/10/docker-an-zhuang-neo4j/</url>
       
         <content type="html"><![CDATA[<h3 id="安装neo4j"><a href="#安装neo4j" class="headerlink" title="安装neo4j"></a>安装neo4j</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run \    --name testneo4j \    -p7474:7474 -p7687:7687 \    -d \    -v $HOME&#x2F;neo4j&#x2F;data:&#x2F;data \    -v $HOME&#x2F;neo4j&#x2F;logs:&#x2F;logs \    -v $HOME&#x2F;neo4j&#x2F;import:&#x2F;var&#x2F;lib&#x2F;neo4j&#x2F;import \    -v $HOME&#x2F;neo4j&#x2F;plugins:&#x2F;plugins \    --env NEO4J_AUTH&#x3D;neo4j&#x2F;test \    neo4j:latest        # NEO4J_AUTH 指定了访问neo4j的登录名和密码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="访问neo4j"><a href="#访问neo4j" class="headerlink" title="访问neo4j"></a>访问neo4j</h3><blockquote><p>url: <a href="http://localhost:7474/">http://localhost:7474/</a></p><p>username: neo4j</p><p>password: test</p></blockquote>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+            <tag> neo4j </tag>
+            
+        </tags>
       
     </entry>
     
